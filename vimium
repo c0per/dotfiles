@@ -1,0 +1,31 @@
+unmapAll
+
+map j scrollDown
+map k scrollUp
+map h scrollLeft
+map l scrollRight
+map gg scrollToTop
+map G scrollToBottom
+map <c-d> scrollPageDown
+map <c-u> scrollPageUp
+
+map H goBack
+map L goForward
+
+map [b previousTab
+map ]b nextTab
+map [B firstTab
+map ]B lastTab
+
+map yy copyCurrentUrl
+map p openCopiedUrlInCurrentTab
+map P openCopiedUrlInNewTab
+
+map f LinkHints.activateMode
+map F LinkHints.activateModeToOpenInNewForegroundTab
+
+map / enterFindMode
+map n performFind
+map N performBackwardsFind
+
+map <space>x removeTab
