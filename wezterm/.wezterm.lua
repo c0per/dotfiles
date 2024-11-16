@@ -2,8 +2,8 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- font
-config.font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Sans CJK SC' }
-config.font_size = 11.5
+config.font = wezterm.font_with_fallback { 'JetBrains Mono NL', 'Noto Sans CJK SC' }
+config.font_size = 11
 
 -- window
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
