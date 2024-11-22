@@ -43,6 +43,26 @@ config.keys = {
         action = wezterm.action.ActivateTabRelative(1)
     },
     {
+        key = 'h',
+        mods = 'SUPER',
+        action = wezterm.action.ActivatePaneDirection 'Left'
+    },
+    {
+        key = 'j',
+        mods = 'SUPER',
+        action = wezterm.action.ActivatePaneDirection 'Down'
+    },
+    {
+        key = 'k',
+        mods = 'SUPER',
+        action = wezterm.action.ActivatePaneDirection 'Up'
+    },
+    {
+        key = 'l',
+        mods = 'SUPER',
+        action = wezterm.action.ActivatePaneDirection 'Right'
+    },
+    {
         key = '{',
         mods = 'SUPER|SHIFT',
         action = wezterm.action.MoveTabRelative(-1)
@@ -76,6 +96,11 @@ config.keys = {
         key = 'r',
         mods = 'SUPER',
         action = wezterm.action.ReloadConfiguration
+    },
+    {
+        key = 'Enter',
+        mods = 'SUPER',
+        action = wezterm.action.SplitPane { direction = 'Right' }
     }
 }
 
