@@ -16,8 +16,6 @@ return {
 
         lsp.tailwindcss.setup {}
 
-        -- lsp from vscode typescript
-        -- lsp.vtsls.setup {}
         lsp.ts_ls.setup {
             on_attach = function (client, bufnr)
                 map_code_action(bufnr)
@@ -30,5 +28,7 @@ return {
                 map_code_action(bufnr)
             end
         }
+
+        lsp.vacuum.setup {}
     end
 }

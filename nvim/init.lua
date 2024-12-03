@@ -57,4 +57,6 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
 })
 
+vim.filetype.add { pattern = { ['openapi.*%.ya?ml'] = 'yaml.openapi' } }
+
 require("config.lazy")
