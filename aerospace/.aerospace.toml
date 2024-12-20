@@ -85,6 +85,7 @@ outer.right =      0
 # All possible commands: https://nikitabobko.github.io/AeroSpace/commands
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#exec-and-forget
+alt-enter = 'exec-and-forget wezterm start'
 # You can uncomment the following lines to open up terminal with alt + enter shortcut (like in i3)
 # alt-enter = '''exec-and-forget osascript -e '
 # tell application "Terminal"
@@ -123,6 +124,7 @@ alt-6 = 'workspace 6'
 alt-7 = 'workspace 7'
 alt-8 = 'workspace 8'
 alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
 alt-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
 alt-b = 'workspace B'
 alt-c = 'workspace C'
