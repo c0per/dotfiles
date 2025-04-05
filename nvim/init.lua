@@ -24,6 +24,8 @@ vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>n', '<Cmd>nohlsearch<Cr>')
+vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
 
 vim.diagnostic.config({
     underline = true,
@@ -35,7 +37,7 @@ vim.diagnostic.config({
     }
 })
 vim.opt.updatetime = 200
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
+vim.api.nvim_create_autocmd('CursorHold', {
     pattern = "*",
     callback = function()
         for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
@@ -57,6 +59,14 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end
 })
 
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--     callback = function(e)
+--         local client = vim.lsp.get_client_by_id(e.data.client_id)
+--     end
+-- })
+
 vim.filetype.add { pattern = { ['openapi.*%.ya?ml'] = 'yaml.openapi' } }
+
+vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer' })
 
 require("config.lazy")
