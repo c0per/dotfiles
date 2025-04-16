@@ -101,6 +101,11 @@ config.keys = {
         key = 'Enter',
         mods = 'SUPER',
         action = wezterm.action.SplitPane { direction = 'Right' }
+    },
+    {
+        key = 'Enter',
+        mods = 'SUPER|SHIFT',
+        action = wezterm.action.SplitPane { direction = 'Down' }
     }
 }
 
