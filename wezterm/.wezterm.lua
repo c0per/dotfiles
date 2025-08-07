@@ -28,6 +28,11 @@ config.keys = {
         action = wezterm.action.SpawnTab 'CurrentPaneDomain'
     },
     {
+        key = 'x',
+        mods = 'SUPER',
+        action = wezterm.action.CloseCurrentPane { confirm = true }
+    },
+    {
         key = 'w',
         mods = 'SUPER',
         action = wezterm.action.CloseCurrentTab { confirm = true }
