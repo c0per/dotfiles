@@ -69,4 +69,38 @@ vim.filetype.add { pattern = { ['openapi.*%.ya?ml'] = 'yaml.openapi' } }
 
 vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer' })
 
+-- vim.cmd([[
+-- augroup folds
+-- " Don't screw up folds when inserting text that might affect them, until
+-- " leaving insert mode. Foldmethod is local to the window. Protect against
+-- " screwing up folding when switching between windows.
+-- autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
+-- autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
+-- augroup END
+-- ]])
+
+-- -- Switch to 'manual' foldmethod when entering Insert mode
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--   callback = function()
+--     -- Save the current foldmethod only if we haven't already
+--     if not vim.w.last_fdm then
+--       vim.w.last_fdm = vim.opt_local.foldmethod:get()
+--     end
+--     vim.opt_local.foldmethod = "manual"
+--     vim.opt_local.foldenable = false
+--   end,
+-- })
+--
+-- -- Restore the original foldmethod when leaving Insert mode
+-- vim.api.nvim_create_autocmd({"InsertLeave", "WinLeave"}, {
+--   callback = function()
+--     -- Check if we have a saved state to restore
+--     if vim.w.last_fdm then
+--       vim.opt_local.foldmethod = vim.w.last_fdm
+--       vim.w.last_fdm = nil -- Clear the saved state
+--       vim.opt_local.foldenable = true
+--     end
+--   end,
+-- })
+
 require("config.lazy")

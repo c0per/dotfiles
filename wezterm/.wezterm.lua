@@ -3,7 +3,10 @@ local config = wezterm.config_builder()
 
 -- font
 config.font = wezterm.font_with_fallback { 'JetBrains Mono NL', 'Noto Sans CJK SC' }
-config.font_size = 11
+config.font_size = 18
+
+config.front_end = 'WebGpu'
+config.webgpu_power_preference = 'HighPerformance'
 
 -- window
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
@@ -15,7 +18,7 @@ config.keys = {
     {
         key = 'c',
         mods = 'SUPER',
-        action = wezterm.action.CopyTo 'Clipboard'
+        action = wezterm.action.CopyTo 'Clipboard',
     },
     {
         key = 'v',
