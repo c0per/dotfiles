@@ -59,48 +59,54 @@ vim.api.nvim_create_autocmd('CursorHold', {
     end
 })
 
--- vim.api.nvim_create_autocmd('LspAttach', {
---     callback = function(e)
---         local client = vim.lsp.get_client_by_id(e.data.client_id)
---     end
--- })
-
 vim.filetype.add { pattern = { ['openapi.*%.ya?ml'] = 'yaml.openapi' } }
 
-vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer' })
+vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer', 'copilot', 'lua_ls' })
 
--- vim.cmd([[
--- augroup folds
--- " Don't screw up folds when inserting text that might affect them, until
--- " leaving insert mode. Foldmethod is local to the window. Protect against
--- " screwing up folding when switching between windows.
--- autocmd InsertEnter * if !exists('w:last_fdm') | let w:last_fdm=&foldmethod | setlocal foldmethod=manual | endif
--- autocmd InsertLeave,WinLeave * if exists('w:last_fdm') | let &l:foldmethod=w:last_fdm | unlet w:last_fdm | endif
--- augroup END
--- ]])
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
 
--- -- Switch to 'manual' foldmethod when entering Insert mode
--- vim.api.nvim_create_autocmd("InsertEnter", {
---   callback = function()
---     -- Save the current foldmethod only if we haven't already
---     if not vim.w.last_fdm then
---       vim.w.last_fdm = vim.opt_local.foldmethod:get()
---     end
---     vim.opt_local.foldmethod = "manual"
---     vim.opt_local.foldenable = false
---   end,
--- })
---
--- -- Restore the original foldmethod when leaving Insert mode
--- vim.api.nvim_create_autocmd({"InsertLeave", "WinLeave"}, {
---   callback = function()
---     -- Check if we have a saved state to restore
---     if vim.w.last_fdm then
---       vim.opt_local.foldmethod = vim.w.last_fdm
---       vim.w.last_fdm = nil -- Clear the saved state
---       vim.opt_local.foldenable = true
---     end
---   end,
--- })
+vim.keymap.set({ "n", "v" }, "<Leader>aa", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+
+vim.cmd([[highlight RustLogoBright guibg=#ff7f50]])
+vim.cmd([[highlight RustLogoDim guibg=#666666]])
+
+function MyStatusLine()
+    local winid = vim.g.statusline_winid
+    local buf = vim.api.nvim_win_get_buf(winid)
+
+    local mode = vim.fn.mode()
+
+    local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ':~:.')
+    local line = vim.fn.line('.', winid)
+    local col = vim.fn.col('.', winid)
+
+    local status = require 'sidekick.status'.get()
+
+    local left = string.format('%s|%s|%s|%d:%d', mode, filename, vim.bo.filetype, line, col)
+
+    local right = ""
+    if vim.bo.filetype == "rust" then
+        local rust_logo = "🦀"
+        local clients = vim.lsp.get_clients({ bufnr = buf, name = "rust-analyzer" })
+
+        if #clients > 0 then
+            right = "%#RustLogoBright#" .. rust_logo .. "%*|"
+        else
+            right = "%#RustLogoDim#" .. rust_logo .. "%*|"
+        end
+    end
+
+    right = right .. (status and status.kind .. '|' .. tostring(status.busy) or 'no copilot')
+
+    return left .. ' %= ' .. right
+end
+
+vim.api.nvim_create_autocmd("WinEnter", {
+    pattern = "*",
+    callback = function()
+        vim.o.statusline = '%!v:lua.MyStatusLine()'
+    end
+})
 
 require("config.lazy")
