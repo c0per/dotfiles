@@ -22,7 +22,12 @@ vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
 
 vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', '<leader>f', vim.lsp.buf.format)
+vim.keymap.set('n', '<leader>f', function()
+    vim.lsp.buf.format {
+        filter = function(client) return client.name ~= "ts_ls" end
+    }
+end
+)
 vim.keymap.set('n', '<leader>n', '<Cmd>nohlsearch<Cr>')
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename)
