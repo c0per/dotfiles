@@ -12,7 +12,9 @@ config.webgpu_power_preference = 'HighPerformance'
 
 -- ssh domain
 config.ssh_domains = {
-    { name = 'arch', remote_address = 'c0per-arch.zhili.internal', username = 'c0per' }
+    { name = 'arch', remote_address = 'arch', username = 'c0per' },
+    { name = 'arch-local', remote_address = 'arch-local', username = 'c0per' },
+    { name = 'arch-tailnet', remote_address = 'c0per-arch.zhili.internal', username = 'c0per' }
 }
 
 -- window
