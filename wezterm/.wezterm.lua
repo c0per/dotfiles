@@ -2,8 +2,19 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- font
-config.font = wezterm.font_with_fallback { 'JetBrains Mono NL', 'Noto Sans CJK SC' }
 config.font_size = 19
+
+wezterm.on('toggle-ligature', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.harfbuzz_features then
+    -- If we haven't overridden it yet, then override with ligatures disabled
+    overrides.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+  else
+    -- else we did already, and we should disable out override now
+    overrides.harfbuzz_features = nil
+  end
+  window:set_config_overrides(overrides)
+end)
 
 config.color_scheme = 'Catppuccin Mocha'
 
@@ -47,6 +58,8 @@ config.keys = {
     { key = 'F',     mods = 'SUPER|SHIFT', action = wezterm.action.Search { CaseInSensitiveString = '' } },
     { key = '-',     mods = 'SUPER',       action = wezterm.action.DecreaseFontSize },
     { key = '=',     mods = 'SUPER',       action = wezterm.action.IncreaseFontSize },
+    { key = 'f',     mods = 'SUPER|CTRL',  action = wezterm.action.ToggleFullScreen },
+    { key = 'l',     mods = 'SUPER|CTRL',  action = wezterm.action.EmitEvent 'toggle-ligature' },
     { key = 'r',     mods = 'SUPER',       action = wezterm.action.ReloadConfiguration },
 
     { key = 'Enter', mods = 'SUPER',       action = wezterm.action.SplitPane { direction = 'Right' } },
