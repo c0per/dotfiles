@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local config = wezterm.config_builder()
 
 -- font
+config.font = wezterm.font_with_fallback { 'JetBrains Mono', 'Noto Sans CJK SC' }
 config.font_size = 19
 
 wezterm.on('toggle-ligature', function(window, pane)
@@ -43,6 +44,7 @@ config.keys = {
     { key = 'v',     mods = 'SUPER',       action = wezterm.action.PasteFrom 'Clipboard' },
 
     { key = 't',     mods = 'SUPER',       action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
+    { key = 'n',     mods = 'SUPER',       action = wezterm.action.SpawnWindow },
     { key = 'x',     mods = 'SUPER',       action = wezterm.action.CloseCurrentPane { confirm = true } },
     { key = 'w',     mods = 'SUPER',       action = wezterm.action.CloseCurrentTab { confirm = true } },
     { key = '[',     mods = 'SUPER',       action = wezterm.action.ActivateTabRelative(-1) },
