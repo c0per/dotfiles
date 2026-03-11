@@ -12,7 +12,8 @@ return {
                 "c", "cpp", "css", "csv", "fish",
                 "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
                 "html", "javascript", "json", "lua", "markdown", "markdown_inline",
-                "nginx", "rust", "sql", "toml", "tsx", "typescript", "typst", "yaml"
+                "nginx", "rust", "sql", "toml", "tsx", "typescript", "typst", "yaml",
+                "go"
             },
             sync_install = false,
 

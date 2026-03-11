@@ -8,6 +8,16 @@ vim.opt.relativenumber = true
 
 vim.opt.termguicolors = true
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "go",
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.expandtab = false
+    vim.opt_local.softtabstop = 4
+  end,
+})
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 vim.keymap.set('i', '<C-c>', '<Esc>')
@@ -70,7 +80,7 @@ vim.api.nvim_create_autocmd('CursorHold', {
 
 vim.filetype.add { pattern = { ['openapi.*%.ya?ml'] = 'yaml.openapi' } }
 
-vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer', 'copilot', 'lua_ls' })
+vim.lsp.enable({ 'biome', 'ts_ls', 'tailwindcss', 'rust-analyzer', 'lua_ls', 'gopls' })
 
 -- Expand 'cc' into 'CodeCompanion' in the command line
 vim.cmd([[cab cc CodeCompanion]])

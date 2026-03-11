@@ -5,6 +5,7 @@ return {
             formatters_by_ft = {
                 lua = { "lua-language-server" },
                 rust = { "rustfmt", lsp_format = "fallback" },
+                go = { "goimports", "gofumpt" },
                 javascript = { "oxfmt" },
                 typescript = { "oxfmt" },
                 javascriptreact = { "oxfmt" },
