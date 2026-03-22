@@ -5,7 +5,7 @@ return {
         -- vim.opt.foldmethod = 'expr'
         -- vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
-        local configs = require("nvim-treesitter.configs")
+        local configs = require("nvim-treesitter")
 
         configs.setup({
             ensure_installed = {

@@ -1,8 +1,11 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
-        branch = '0.1.x',
-        dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-fzf-native.nvim' },
+        version = '*',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+        },
         config = function()
             require('telescope').setup {
                 extensions = {
@@ -25,6 +28,5 @@ return {
             vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'find help' })
             vim.keymap.set('n', '<leader>sr', builtin.lsp_references, {})
         end
-    },
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' }
+    }
 }

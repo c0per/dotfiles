@@ -10,6 +10,7 @@ return {
                 typescript = { "oxfmt" },
                 javascriptreact = { "oxfmt" },
                 typescriptreact = { "oxfmt" },
+                sql = { "pg_format" },
             }
         }
     end,
